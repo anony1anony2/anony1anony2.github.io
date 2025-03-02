@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reangle-A-Video</title>
+  <style>
+    /* Global styles for high readability and a clean look */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #333;
+    }
+    .container {
+      width: 90%;
+      max-width: 1600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+    }
+    .header {
+      padding: 0;
+      margin-bottom: 20px;
+      background: none;
+      box-shadow: none;
+      text-align: center;
+    }
+    h1, h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    p {
+      margin: 15px 0;
+    }
+    .authors {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+    .section {
+      text-align: center;
+      margin-bottom: 3em;
+      padding: 0.5em;
+      background-color: #ffffff;
+      border-radius: 1em;
+      box-shadow: 0 0 1em 0em rgba(0, 0, 0, 0.1);
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 1em;
+      margin-top: 2em;
+    }
+    .video-item p {
+      margin-bottom: 0.5em;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5em;
+      box-shadow: 0 0 1em 0em rgba(0, 0, 0, 0.15);
+    }
+    .vid-des {
+      font-size: larger;
+    }
+    .highlight {
+    background-color: #333;
+    color: #fff;
+    padding: 0.2em 0.5em;
+    border-radius: 0.5em;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header without extra padding or border -->
+    <div class="header">
+      <h1>Reangle-A-Video: A Unified Framework for Synchronized Multi-Camera Video Generation <br> Without Generative Multi-View Prior</h1>
+      <p class="authors" style="font-size: 22px;">Anonymous authors</p>
+    </div>
+    
+    <p style="text-align: center; font-size: 20px; margin-bottom: 2em; color: #555;">
+      <em>Press Enter to pause or resume all videos.</em>
+    </p>
+
+    <!-- TL;DR section -->
+    <div class="section" id="tldr">
+      <div class="section-title">TL;DR</div>
+      <p style="width: 70%; text-align: center; font-size: 18px; margin: 0 auto;">
+        We introduce Reangle-A-Video, a unified framework for generating synchronized multi-view videos from a single input video. <br>
+        We achieve <b>(a) <u>Static view transport</b></u> and <b>(b) <u>Dynamic camera control</u></b> without relying on any multi-view generative priors, where both approaches offer six degrees of freedom.
+      </p>
+      <br>
+
+      <p style="font-size: 20px; font-weight: bold;">
+        (a) <u>Static view transport</u>: Regeneration of the input video <i>shooting from target viewpoints</i>.
+      </p>
+      
+      <!-- Video grid for static view transport -->
+      <div class="video-grid">
+        <!-- First row -->
+        <div class="video-item">
+          <div class="vid-des">Input video</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/parrot_0_48_1/input.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">View from Orbit right</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/parrot_0_48_1/horizontal-8.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">View from Orbit down</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/parrot_0_48_1/vertical+4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
+        <!-- Second row -->
+        <div class="video-item">
+          <div class="vid-des">View from Orbit left</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/parrot_0_48_1/horizontal+6.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">View from Dolly zoom</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/parrot_0_48_1/zoomin-22.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">View from Dolly zoom out</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/parrot_0_48_1/zoomout+4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <br><br>
+      
+      <p style="font-size: 20px; font-weight: bold;">
+        (b) <u>Dynamic camera control</u>: Regeneration of the input video <i>with target camera movements</i>.
+      </p>
+      
+      <!-- Video grid for dynamic camera control -->
+      <div class="video-grid">
+        <!-- First row -->
+        <div class="video-item">
+          <div class="vid-des">Input video</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/frog_0_48_1/input.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">Camera movement: Orbit up</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/frog_0_48_1/vertical-0.2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">Camera movement: Orbit down</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/frog_0_48_1/vertical+0.1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
+        <!-- Second row -->
+        <div class="video-item">
+          <div class="vid-des">Camera movement: Orbit left</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/frog_0_48_1/horizontal+0.2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">Camera movement: Orbit right</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/frog_0_48_1/horizontal-0.2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-item">
+          <div class="vid-des">Camera movement: Dolly zoom in</div>
+          <video muted autoplay loop style="width: 80%">
+            <source src="static/teaser/frog_0_48_1/zoomin-0.4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+  
+  <script>
+    // Global flag to track playing state for Enter key toggle
+    let videosPlaying = true;
+    
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        const videos = document.querySelectorAll("video");
+        if (videosPlaying) {
+          videos.forEach(video => video.pause());
+          videosPlaying = false;
+        } else {
+          videos.forEach(video => video.play());
+          videosPlaying = true;
+        }
+      }
+    });
+    
+    // Synchronize videos within each video-grid: reset and start them simultaneously
+    function synchronizeVideoGrids() {
+      const grids = document.querySelectorAll('.video-grid');
+      grids.forEach(grid => {
+        const videos = grid.querySelectorAll('video');
+        videos.forEach(video => {
+          video.pause();
+          video.currentTime = 0;
+        });
+        // Use a slight delay to ensure the reset takes effect before playing
+        setTimeout(() => {
+          videos.forEach(video => video.play());
+        }, 100);
+      });
+    }
+    
+    // Call synchronization function when the window loads
+    window.addEventListener("load", () => {
+      synchronizeVideoGrids();
+    });
+  </script>
+</body>
+</html>
